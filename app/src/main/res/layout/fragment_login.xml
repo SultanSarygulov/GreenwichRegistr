@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgcolor"
-    tools:context=".MainActivity">
+    tools:context=".LoginFragment">
 
     <TextView
-        android:id="@+id/login_title"
+        android:id="@+id/register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
@@ -25,20 +25,20 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/login_title"
-        app:layout_constraintEnd_toStartOf="@+id/login_title"
+        app:layout_constraintBottom_toBottomOf="@+id/register_title"
+        app:layout_constraintEnd_toStartOf="@+id/register_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/login_title" />
+        app:layout_constraintTop_toTopOf="@+id/register_title" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/login_title"
+        app:layout_constraintBottom_toBottomOf="@+id/register_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/login_title"
-        app:layout_constraintTop_toTopOf="@+id/login_title" />
+        app:layout_constraintStart_toEndOf="@+id/register_title"
+        app:layout_constraintTop_toTopOf="@+id/register_title" />
 
     <TextView
         android:id="@+id/enter_name_txt"
@@ -65,7 +65,7 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_title" />
+        app:layout_constraintTop_toBottomOf="@+id/register_title" />
 
     <EditText
         android:id="@+id/enter_pnone_et"
@@ -109,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@+id/enter_pnone_et" />
 
     <TextView
-        android:id="@+id/first_time_txt"
+        android:id="@+id/have_account_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="69dp"
@@ -130,8 +130,51 @@
         android:text="Зарегистрироваться"
         android:textColor="#487349"
         android:textSize="16sp"
+        android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_time_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/have_account_txt" />
 
+    <TextView
+        android:id="@+id/empty_alert_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Поля не могут быть пустыми"
+        android:textColor="#AE1111"
+        app:layout_constraintBottom_toTopOf="@+id/enter_name_txt"
+        app:layout_constraintStart_toStartOf="@+id/enter_name_et"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/empty_name_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="*"
+        android:textColor="#AE1111"
+        android:textSize="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/enter_name_txt"
+        app:layout_constraintEnd_toStartOf="@+id/enter_name_txt"
+        app:layout_constraintTop_toTopOf="@+id/enter_name_txt"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/empty_phone_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="*"
+        android:textColor="#AE1111"
+        android:textSize="19dp"
+        app:layout_constraintBottom_toBottomOf="@+id/enter_phone_txt"
+        app:layout_constraintEnd_toStartOf="@+id/enter_phone_txt"
+        app:layout_constraintTop_toTopOf="@+id/enter_phone_txt"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

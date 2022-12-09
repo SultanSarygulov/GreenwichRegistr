@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "599075724430",
+    "project_id": "sutlan-s-greenwich",
+    "storage_bucket": "sutlan-s-greenwich.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599075724430:android:2b8b1ebaaf2e3e5c94fddf",
+        "android_client_info": {
+          "package_name": "com.example.greenwichregistr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599075724430-rdnasq4mhs46lf1k7sr4j02rpmofa4ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenwichregistr",
+            "certificate_hash": "5bb88a1404215db64407b66c1ad62f086de81f9c"
+          }
+        },
+        {
+          "client_id": "599075724430-5gp9av7056io40j97biask1j5g3pv31o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKqNGFQAmZjhZCC-nVUhR_w-nACinihYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599075724430-5gp9av7056io40j97biask1j5g3pv31o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
