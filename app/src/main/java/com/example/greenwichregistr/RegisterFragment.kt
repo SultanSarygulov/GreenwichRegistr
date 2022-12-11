@@ -1,6 +1,8 @@
 package com.example.greenwichregistr
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,33 +30,65 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
+        binding.enterNameEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
 
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                    binding.registerButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.main_green)
+
+                } else {
+                    binding.registerButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.gray)
+                }
+            }
+        })
+
+        binding.enterPnoneEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                    binding.registerButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.main_green)
+
+                } else {
+                    binding.registerButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.gray)
+                }
+            }
+        })
 
         binding.registerButton.setOnClickListener {
+
             checkInput()
-
-            colorButton()
-        }
-    }
-
-    private fun colorButton() {
-        if (binding.enterNameEt.text.isEmpty() || binding.enterPnoneEt.text.isEmpty()){
-            binding.registerButton.backgroundTintList =
-                getResources().getColorStateList(R.color.gray)
-        } else {
-            binding.registerButton.backgroundTintList =
-                getResources().getColorStateList(R.color.main_green)
-
-            findNavController().navigate(R.id.action_registerFragment_to_confirmFragment)
         }
     }
 
     private fun checkInput() {
-        binding.emptyAlertTxt.isVisible =
-            binding.enterNameEt.text.isEmpty() || binding.enterPnoneEt.text.isEmpty()
+        if (binding.enterNameEt.text.isEmpty() || binding.enterPnoneEt.text.isEmpty()){
+            binding.emptyAlertTxt.isVisible = true
 
-        binding.emptyNameAlert.isVisible = binding.enterNameEt.text.isEmpty()
+            binding.emptyNameAlert.isVisible = binding.enterNameEt.text.isEmpty()
 
-        binding.emptyPhoneAlert.isVisible = binding.enterPnoneEt.text.isEmpty()
+            binding.emptyPhoneAlert.isVisible = binding.enterPnoneEt.text.isEmpty()
+        } else {
+            binding.emptyAlertTxt.isVisible = false
+            findNavController().navigate(R.id.action_registerFragment_to_confirmFragment)
+        }
+
+
+
     }
 }

@@ -1,6 +1,8 @@
 package com.example.greenwichregistr
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.greenwichregistr.databinding.FragmentLoginBinding
+import org.w3c.dom.Text
 
 class LoginFragment : Fragment() {
 
@@ -29,23 +32,52 @@ class LoginFragment : Fragment() {
 
         setRegisterButton()
 
+        binding.enterNameEt.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                    binding.loginButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.main_green)
+
+                } else {
+                    binding.loginButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.gray)
+                }
+            }
+        })
+
+        binding.enterPnoneEt.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                    binding.loginButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.main_green)
+
+                } else {
+                    binding.loginButton.backgroundTintList =
+                        getResources().getColorStateList(R.color.gray)
+                }
+            }
+        })
+
         binding.loginButton.setOnClickListener {
 
             checkInput()
-
-            colorButton()
         }
     }
 
-    private fun colorButton() {
-        if (binding.enterNameEt.text.isEmpty() || binding.enterPnoneEt.text.isEmpty()){
-            binding.loginButton.backgroundTintList =
-                getResources().getColorStateList(R.color.gray)
-        } else {
-            binding.loginButton.backgroundTintList =
-                getResources().getColorStateList(R.color.main_green)
-        }
-    }
 
     private fun checkInput() {
         binding.emptyAlertTxt.isVisible =
