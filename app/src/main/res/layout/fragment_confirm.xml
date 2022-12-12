@@ -19,7 +19,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -99,7 +99,38 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <com.chaos.view.PinView
+        android:id="@+id/code_boxes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:itemWidth="50dp"
+        app:itemHeight="50dp"
+        android:layout_marginTop="18dp"
+        app:itemCount="6"
+        app:lineColor="@color/black"
+        tools:text="111111"
+        android:textSize="36sp"
+        style="@style/PinWidget.PinView"
+        android:itemBackground="@drawable/code_box"
+        android:layout_gravity="center"
+        android:cursorVisible="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt" />
+
+    <TextView
+        android:id="@+id/invalid_code_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Введеный код неверен"
+        android:textColor="#B50000"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/code_boxes"
+        app:layout_constraintTop_toBottomOf="@+id/code_boxes"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+    <!--<EditText
         android:id="@+id/editTextNumber"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -195,6 +226,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber5"
         app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
-        tools:text="1" />
+        tools:text="1" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

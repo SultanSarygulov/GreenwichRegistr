@@ -23,6 +23,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private var storedVerificationId: String? = ""
 
     private lateinit var binding: FragmentRegisterBinding
 
@@ -118,7 +119,10 @@ class RegisterFragment : Fragment() {
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
                 binding.emptyAlertTxt.isVisible = false
-                findNavController().navigate(R.id.action_registerFragment_to_confirmFragment)
+                storedVerificationId = verificationId
+                val action = RegisterFragmentDirections.actionRegisterFragmentToConfirmFragment(
+                    storedVerificationId, binding.enterPnoneEt.text.toString())
+                findNavController().navigate(action)
             }
         }
 
