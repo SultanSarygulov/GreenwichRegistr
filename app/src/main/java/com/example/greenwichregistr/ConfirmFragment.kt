@@ -75,6 +75,7 @@ class ConfirmFragment : Fragment() {
                 Log.d("Nigger", "${task.isSuccessful}")
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_confirmFragment_to_successFragment)
 
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
