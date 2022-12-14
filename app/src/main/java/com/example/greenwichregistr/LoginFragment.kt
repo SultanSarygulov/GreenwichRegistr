@@ -32,45 +32,13 @@ class LoginFragment : Fragment() {
 
         setRegisterButton()
 
-        binding.enterNameEt.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+        binding.enterNameEt.addTextChangedListener(
+            LoginTextWatcher()
+        )
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
-                    binding.loginButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.main_green)
-
-                } else {
-                    binding.loginButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.gray)
-                }
-            }
-        })
-
-        binding.enterPnoneEt.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
-                    binding.loginButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.main_green)
-
-                } else {
-                    binding.loginButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.gray)
-                }
-            }
-        })
+        binding.enterPnoneEt.addTextChangedListener(
+            LoginTextWatcher()
+        )
 
         binding.loginButton.setOnClickListener {
 
@@ -91,6 +59,26 @@ class LoginFragment : Fragment() {
     private fun setRegisterButton() {
         binding.registerTxtButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+    }
+
+    inner class LoginTextWatcher: android.text.TextWatcher{
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+
+            if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                binding.loginButton.backgroundTintList =
+                    getResources().getColorStateList(R.color.main_green)
+
+            } else {
+                binding.loginButton.backgroundTintList =
+                    getResources().getColorStateList(R.color.gray)
+            }
         }
     }
 }

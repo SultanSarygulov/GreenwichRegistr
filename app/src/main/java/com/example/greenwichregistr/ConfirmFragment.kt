@@ -1,29 +1,33 @@
 package com.example.greenwichregistr
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.greenwichregistr.databinding.FragmentConfirmBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.concurrent.Executor
+import java.util.concurrent.TimeUnit
 
 class ConfirmFragment : Fragment() {
 
     private lateinit var binding: FragmentConfirmBinding
     private val args by navArgs<ConfirmFragmentArgs>()
     private lateinit var auth: FirebaseAuth
+    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var OTP: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +36,9 @@ class ConfirmFragment : Fragment() {
 
         auth = Firebase.auth
 
+        resendToken = args.resendToken
+        OTP = args.verificationID!!
+
         binding = FragmentConfirmBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -39,6 +46,10 @@ class ConfirmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.userPhoneTxt.text = args.userPhone
+
+        resendCodeVisibility()
 
         binding.backButton.setOnClickListener {
             findNavController().navigateUp()
@@ -59,7 +70,6 @@ class ConfirmFragment : Fragment() {
                     binding.codeBoxes.setItemBackground(resources.getDrawable(R.drawable.code_box))
                     binding.codeBoxes.setTextColor(resources.getColor(R.color.black))
                     binding.invalidCodeAlert.isVisible = false
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
 
                     val credential = PhoneAuthProvider.getCredential(args.verificationID!!, code)
                     signInWithPhoneAuthCredential(credential)
@@ -79,9 +89,53 @@ class ConfirmFragment : Fragment() {
 
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(requireContext(), "NIGGAAAAA WRONG CODE", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Invalid code", Toast.LENGTH_LONG).show()
                     }
                 }
             }
+    }
+
+    private fun resendCodeVisibility(){
+        binding.resendTxtBtn.text = "Отправить код повторно через"
+
+        Handler(Looper.myLooper()!!).postDelayed(Runnable {
+            binding.resendTxtBtn.text = "Отправить код повторно"
+            binding.resendTxtBtn.setTextColor(resources.getColor(R.color.main_green))
+            binding.resendTxtBtn.setOnClickListener {
+                resendCode()
+                resendCodeVisibility()
+            }
+        }, 60000)
+
+    }
+
+    private fun resendCode(){
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(args.userPhone)       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this.requireActivity())                 // Activity (for callback binding)
+            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+            Toast.makeText(requireContext(), "Send a correct phone number", Toast.LENGTH_LONG).show()
+            Log.d("Nigger", "${e}")
+        }
+
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
+            resendToken = token
+            OTP = verificationId
+
+        }
     }
 }

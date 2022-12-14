@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_confirmFragment_to_successFragment"
             app:destination="@id/successFragment" />
+        <argument
+            android:name="resendToken"
+            app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"

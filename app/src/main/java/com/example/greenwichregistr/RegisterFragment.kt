@@ -43,45 +43,13 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
-        binding.enterNameEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+        binding.enterNameEt.addTextChangedListener(
+            RegisterTextWatcher()
+        )
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
-                    binding.registerButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.main_green)
-
-                } else {
-                    binding.registerButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.gray)
-                }
-            }
-        })
-
-        binding.enterPnoneEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-                if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
-                    binding.registerButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.main_green)
-
-                } else {
-                    binding.registerButton.backgroundTintList =
-                        getResources().getColorStateList(R.color.gray)
-                }
-            }
-        })
+        binding.enterPnoneEt.addTextChangedListener(
+            RegisterTextWatcher()
+        )
 
         binding.registerButton.setOnClickListener {
 
@@ -121,7 +89,7 @@ class RegisterFragment : Fragment() {
                 binding.emptyAlertTxt.isVisible = false
                 storedVerificationId = verificationId
                 val action = RegisterFragmentDirections.actionRegisterFragmentToConfirmFragment(
-                    storedVerificationId, binding.enterPnoneEt.text.toString())
+                    storedVerificationId, binding.enterPnoneEt.text.toString(), token)
                 findNavController().navigate(action)
             }
         }
@@ -133,5 +101,25 @@ class RegisterFragment : Fragment() {
             .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    inner class RegisterTextWatcher: TextWatcher{
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+
+            if (binding.enterNameEt.text.isNotEmpty() && binding.enterPnoneEt.text.isNotEmpty()){
+                binding.registerButton.backgroundTintList =
+                    getResources().getColorStateList(R.color.main_green)
+
+            } else {
+                binding.registerButton.backgroundTintList =
+                    getResources().getColorStateList(R.color.gray)
+            }
+        }
     }
 }

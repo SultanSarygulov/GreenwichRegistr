@@ -19,7 +19,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -27,11 +27,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:fontFamily="@font/open_sans"
-        android:text="На ваш номер +996 (550) 28-85-53"
+        android:text="На ваш номер"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/user_phone_txt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_register_title" />
+
+    <TextView
+        android:id="@+id/user_phone_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="+996 703 911 246"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/confirm_register_title" />
 
     <TextView
@@ -83,12 +98,12 @@
         android:text="Назад"
         android:textColor="@color/main_green"
         app:cornerRadius="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/resend_txt_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/resend_txt_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
@@ -101,22 +116,22 @@
 
     <com.chaos.view.PinView
         android:id="@+id/code_boxes"
+        style="@style/PinWidget.PinView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:itemWidth="50dp"
-        app:itemHeight="50dp"
-        android:layout_marginTop="18dp"
-        app:itemCount="6"
-        app:lineColor="@color/black"
-        tools:text="111111"
-        android:textSize="36sp"
-        style="@style/PinWidget.PinView"
-        android:itemBackground="@drawable/code_box"
         android:layout_gravity="center"
+        android:layout_marginTop="18dp"
         android:cursorVisible="true"
+        android:itemBackground="@drawable/code_box"
+        android:textSize="36sp"
+        app:itemCount="6"
+        app:itemHeight="50dp"
+        app:itemWidth="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        app:lineColor="@color/black"
+        tools:text="111111" />
 
     <TextView
         android:id="@+id/invalid_code_alert"
@@ -126,10 +141,10 @@
         android:text="Введеный код неверен"
         android:textColor="#B50000"
         android:textSize="12sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/code_boxes"
         app:layout_constraintTop_toBottomOf="@+id/code_boxes"
-        android:visibility="invisible"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
     <!--<EditText
         android:id="@+id/editTextNumber"
         android:layout_width="50dp"
