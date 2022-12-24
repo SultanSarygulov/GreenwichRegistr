@@ -10,4 +10,6 @@
 
     <color name="bgcolor">#F9F4EE</color>
     <color name="main_green">#487349</color>
+    <color name="gray">#9D9D9D</color>
+    <color name="wrong_red">#B50000</color>
 </resources>

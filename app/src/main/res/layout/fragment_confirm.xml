@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/confirm_register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="166dp"
@@ -26,13 +26,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/open_sans"
-        android:text="На ваш номер +996 (550) 28-85-53"
+        android:text="На ваш номер"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/user_phone_txt"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_register_title" />
+
+    <TextView
+        android:id="@+id/user_phone_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="+996 703 911 246"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_register_title" />
 
     <TextView
         android:id="@+id/textView3"
@@ -47,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/enter_code_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="66dp"
@@ -59,42 +75,174 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/confirm_register_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="123dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/main_green"
         android:fontFamily="@font/open_sans_bold"
         android:padding="15dp"
         android:text="Зарегистрироваться"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/back_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="81dp"
         android:backgroundTint="@color/bgcolor"
         android:fontFamily="@font/open_sans_bold"
         android:padding="15dp"
         android:text="Назад"
         android:textColor="@color/main_green"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/resend_txt_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/resend_txt_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
-        android:text="Отправить код повторно через 00:45"
+        android:text="Отправить код повторно через 60 "
         android:textColor="#676767"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.chaos.view.PinView
+        android:id="@+id/code_boxes"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:cursorVisible="true"
+        android:itemBackground="@drawable/code_box"
+        android:textSize="36sp"
+        app:itemCount="6"
+        app:itemHeight="50dp"
+        app:itemWidth="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        app:lineColor="@color/black"
+        tools:text="111111" />
+
+    <TextView
+        android:id="@+id/invalid_code_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Введеный код неверен"
+        android:textColor="#B50000"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/code_boxes"
+        app:layout_constraintTop_toBottomOf="@+id/code_boxes"
+        tools:visibility="visible" />
+
+    <!--<EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumber2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumber3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />
+
+    <EditText
+        android:id="@+id/editTextNumber3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumber4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber2"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />
+
+    <EditText
+        android:id="@+id/editTextNumber4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumber5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber3"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />
+
+    <EditText
+        android:id="@+id/editTextNumber5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumber6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber4"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />
+
+    <EditText
+        android:id="@+id/editTextNumber6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/code_box"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber5"
+        app:layout_constraintTop_toBottomOf="@+id/enter_code_txt"
+        tools:text="1" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

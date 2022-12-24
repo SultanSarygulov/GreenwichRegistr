@@ -33,5 +33,19 @@
         <action
             android:id="@+id/action_confirmFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <argument
+            android:name="verificationID"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="user_phone"
+            app:argType="string" />
+        <argument
+            android:name="resendToken"
+            app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
+        <action
+            android:id="@+id/action_confirmFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>
