@@ -1,12 +1,15 @@
 package com.example.greenwichregistr
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
@@ -14,10 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.greenwichregistr.databinding.FragmentConfirmBinding
+import com.example.greenwichregistr.databinding.FragmentSuccessBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 
@@ -84,8 +89,7 @@ class ConfirmFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 Log.d("Nigger", "${task.isSuccessful}")
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_confirmFragment_to_successFragment)
+                    openDialog()
 
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -95,17 +99,44 @@ class ConfirmFragment : Fragment() {
             }
     }
 
-    private fun resendCodeVisibility(){
-        binding.resendTxtBtn.text = "Отправить код повторно через"
+    private fun openDialog() {
+        val dialog = Dialog(requireContext())
 
-        Handler(Looper.myLooper()!!).postDelayed(Runnable {
-            binding.resendTxtBtn.text = "Отправить код повторно"
-            binding.resendTxtBtn.setTextColor(resources.getColor(R.color.main_green))
-            binding.resendTxtBtn.setOnClickListener {
-                resendCode()
-                resendCodeVisibility()
+        dialog.setContentView(R.layout.fragment_success)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.setCancelable(true)
+        dialog.window?.attributes?.windowAnimations = R.style.animation
+
+        val button = dialog.findViewById<Button>(R.id.button)
+
+        button.setOnClickListener {
+            dialog.dismiss()
+            findNavController().navigate(R.id.action_confirmFragment_to_loginFragment)
+        }
+
+        dialog.show()
+    }
+
+    private fun resendCodeVisibility(){
+        binding.resendTxtBtn.setTextColor(resources.getColor(R.color.black))
+        binding.resendTxtBtn.text = "Отправить код повторно через 60"
+
+        val timer = object: CountDownTimer(60000, 1000){
+            override fun onTick(p0: Long) {
+                binding.resendTxtBtn.text = "Отправить код повторно через ${p0 / 1000}"
             }
-        }, 60000)
+
+            override fun onFinish() {
+                binding.resendTxtBtn.text = "Отправить код повторно"
+                binding.resendTxtBtn.setTextColor(resources.getColor(R.color.main_green))
+                binding.resendTxtBtn.setOnClickListener {
+                    resendCode()
+                    resendCodeVisibility()
+                }
+            }
+        }
+
+        timer.start()
 
     }
 

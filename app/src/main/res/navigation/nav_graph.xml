@@ -40,20 +40,12 @@
         <argument
             android:name="user_phone"
             app:argType="string" />
-        <action
-            android:id="@+id/action_confirmFragment_to_successFragment"
-            app:destination="@id/successFragment" />
         <argument
             android:name="resendToken"
             app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
-    </fragment>
-    <fragment
-        android:id="@+id/successFragment"
-        android:name="com.example.greenwichregistr.SuccessFragment"
-        android:label="fragment_success"
-        tools:layout="@layout/fragment_success" >
         <action
-            android:id="@+id/action_successFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_confirmFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>

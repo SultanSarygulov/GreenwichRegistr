@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="379dp"
     android:layout_height="356dp"
-    android:layout_gravity="center"
-    tools:context=".SuccessFragment">
+    android:layout_gravity="center">
 
 
     <ImageView

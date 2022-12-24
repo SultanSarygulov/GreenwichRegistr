@@ -26,12 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/open_sans"
         android:text="На ваш номер"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/user_phone_txt"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm_register_title" />
 
@@ -107,11 +108,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
-        android:text="Отправить код повторно через 00:45"
+        android:text="Отправить код повторно через 60 "
         android:textColor="#676767"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.chaos.view.PinView
@@ -145,6 +146,7 @@
         app:layout_constraintStart_toStartOf="@+id/code_boxes"
         app:layout_constraintTop_toBottomOf="@+id/code_boxes"
         tools:visibility="visible" />
+
     <!--<EditText
         android:id="@+id/editTextNumber"
         android:layout_width="50dp"

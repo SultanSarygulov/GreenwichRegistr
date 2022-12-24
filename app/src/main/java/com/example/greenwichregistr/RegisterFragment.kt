@@ -39,6 +39,8 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.progressBar.isVisible = false
+
         binding.loginTxtButton.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
@@ -65,6 +67,7 @@ class RegisterFragment : Fragment() {
 
             binding.emptyPhoneAlert.isVisible = binding.enterPnoneEt.text.isEmpty()
         } else {
+            binding.progressBar.isVisible = true
             sendCode()
         }
 
@@ -86,6 +89,7 @@ class RegisterFragment : Fragment() {
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
+
                 binding.emptyAlertTxt.isVisible = false
                 storedVerificationId = verificationId
                 val action = RegisterFragmentDirections.actionRegisterFragmentToConfirmFragment(
